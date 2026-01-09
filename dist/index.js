@@ -71,5 +71,6 @@ const mixedParser = parser.configure({
     })
 });
 const handlebarsLanguage = LRLanguage.define({ parser: mixedParser });
+const handlebarsPureLanguage = LRLanguage.define({ parser });
 
-export { handlebarsLanguage };
+export { handlebarsLanguage, handlebarsPureLanguage };

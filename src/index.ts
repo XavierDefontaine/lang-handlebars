@@ -24,3 +24,10 @@ const mixedParser = parser.configure({
 })
 
 export const handlebarsLanguage = LRLanguage.define({ parser: mixedParser })
+/**
+ * Handlebar language exporting a parser without html mixed language  
+ * Allows you to add your own client side
+ */
+
+export const handlebarsPureLanguage = LRLanguage.define({ parser });
+
