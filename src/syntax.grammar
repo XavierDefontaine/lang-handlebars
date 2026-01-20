@@ -10,11 +10,15 @@ directive {
 }
 
 // Block with opening operator and content
-BlockDirective { BlockOpen (directive | Text)* BlockClose }
+BlockDirective { BlockOpen (BlockInverse | directive | Text)* BlockClose }
 
 BlockOpen { 
   "{{" BlockOperator BlockHelper Identifier (Identifier)* "}}" |
-  "{{" BlockOperator Identifier "}}"
+  "{{" BlockOperator Identifier "}}" 
+}
+
+BlockInverse { 
+  "{{" BlockHelperInverse "}}"
 }
 
 BlockClose { 
@@ -68,7 +72,8 @@ Subexp { "(" (space* (Identifier | Number | Bool | String | Equa | Subexp | "|")
   Identifier { word }
   
   // Known block helper keywords
-  BlockHelper { "each" | "if" | "unless" | "with" | "else" }
+  BlockHelper { "each" | "if" | "unless" | "with" }
+  BlockHelperInverse { "else" }
   
   Text { ![{] Text? | "{" (@eof | ![{] Text?) }
   hex { @digit | $[a-fA-F] }
@@ -84,7 +89,7 @@ Subexp { "(" (space* (Identifier | Number | Bool | String | Equa | Subexp | "|")
   }
   space { @whitespace+ }
   
-  @precedence { BlockHelper, Identifier }
+  @precedence { BlockHelperInverse, BlockHelper, Identifier }
   @precedence { space, Identifier }
   @precedence { spaces, newline, Identifier }
   @precedence { spaces, newline, Text }
