@@ -1,12 +1,11 @@
 import { styleTags, tags } from "@lezer/highlight"
 
 export const Highlight = styleTags({
-    "if endif": tags.controlKeyword,
-    "{{ }}": tags.tagName,
-    "{{{ }}}": tags.tagName,
-    BIHelper: tags.keyword,
+    BlockOperator: tags.keyword,          // # ^ / *
+    BlockHelper: tags.controlKeyword,     // if, each, unless, with, else
+    "{{ }}": tags.strong,
+    "{{{ }}}": tags.strong,
     Escape: tags.annotation,
-    DirectiveContent: tags.variableName,
     BlockComment: tags.comment,
     OnelineComment: tags.comment,
     Number: tags.number,
